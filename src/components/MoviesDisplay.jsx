@@ -2,19 +2,33 @@ import { useState } from 'react';
 import moviesService from '../services/movies';
 import { useEffect } from 'react';
 
+const Movie = ({ title, url, description, director, genres }) => {
+    return (
+        <div>
+            <h1>{title}</h1>
+            <img src={url} alt={`(Image of ${title})`}/>
+            <p>Director: {director}</p>
+            <div>
+                Genres: {genres.join(', ')}
+            </div>
+            <p>Description: {description}</p>
+        </div>
+    );
+};
+
 const MoviesDisplay = () => {
-    const [movies, setMovies] = useState([])
+    const [movies, setMovies] = useState([]);
 
     useEffect(() => {
         const getMovies = async () => setMovies(await moviesService.getAll());
         getMovies()
-    }, [])
+    }, []);
 
     return (
         <div>
         {
-            movies.map(element =>
-                <p key={element.id}>{element?.title ?? 'error'}</p>
+            movies.map(movie =>
+                <Movie key={movie.id} {...movie} />
             )
         }
         </div>
