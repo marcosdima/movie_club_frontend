@@ -2,11 +2,12 @@ import { useState } from 'react';
 import moviesService from '../services/movies';
 import { useEffect } from 'react';
 
-const Movie = ({ title, url, description, director, genres }) => {
+const Movie = ({ title, imageUrl, description, director, genres }) => {
+    console.log(imageUrl)
     return (
         <div>
             <h1>{title}</h1>
-            <img src={url} alt={`(Image of ${title})`}/>
+            <img src={imageUrl} alt={`(Image of ${title})`}/>
             <p>Director: {director}</p>
             <div>
                 Genres: {genres.join(', ')}
