@@ -3,7 +3,6 @@ import moviesService from '../services/movies';
 import { useEffect } from 'react';
 
 const Movie = ({ title, imageUrl, description, director, genres }) => {
-    console.log(imageUrl)
     return (
         <div>
             <h1>{title}</h1>
