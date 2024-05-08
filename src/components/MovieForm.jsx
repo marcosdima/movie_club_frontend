@@ -1,5 +1,7 @@
 import { useState } from "react";
 import moviesService from '../services/movies';
+import { useDispatch } from "react-redux";
+import { addMovie } from "../reducers/moviesReducer";
 
 const MovieForm = () => {
     const [title, setTitle] = useState('');
@@ -8,8 +10,11 @@ const MovieForm = () => {
     const [director, setDirector]= useState('')
     const [genres, setGenre] = useState([]);
 
-    const create = async () => {
-        await moviesService.add({ title, description, imageUrl, director, genres });
+    const dispatch = useDispatch();
+
+    const create = () => {
+        const movie = { title, description, imageUrl, director, genres };
+        if (movie) dispatch(addMovie(movie));
         reset();
     }
 

@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import moviesService from '../services/movies';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const Movie = ({ title, imageUrl, description, director, genres }) => {
     return (
@@ -17,12 +15,7 @@ const Movie = ({ title, imageUrl, description, director, genres }) => {
 };
 
 const MoviesDisplay = () => {
-    const [movies, setMovies] = useState([]);
-
-    useEffect(() => {
-        const getMovies = async () => setMovies(await moviesService.getAll());
-        getMovies()
-    }, []);
+    const movies = useSelector(state => state.movies);
 
     return (
         <div>
