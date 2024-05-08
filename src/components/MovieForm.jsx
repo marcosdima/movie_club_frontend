@@ -1,5 +1,4 @@
 import { useState } from "react";
-import moviesService from '../services/movies';
 import { useDispatch } from "react-redux";
 import { addMovie } from "../reducers/moviesReducer";
 

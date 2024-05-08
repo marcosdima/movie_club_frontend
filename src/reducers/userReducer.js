@@ -1,21 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit"
-import userService from '../services/login'
+import { createSlice } from "@reduxjs/toolkit";
+import userService from '../services/login';
 
-const identifier = 'loggedMovieAppUser'
+const identifier = 'loggedMovieAppUser';
 
 const userSlice = createSlice({
     name: 'user',
     initialState: null,
     reducers: {
         setUser(state, action) {
-            return action.payload
+            return action.payload;
         },
         reset() {
-            window.localStorage.clear()
-            return null
+            window.localStorage.clear();
+            return null;
         }
     }
-})
+});
 
 const { setUser } = userSlice.actions;
 export const { reset } = userSlice.actions;
@@ -30,16 +30,16 @@ export const login = (username, password) => {
         );
 
         dispatch(setUser(userLogin));
-    }
-}
+    };
+};
 
 export const checkLogged = () => {
     return async dispatch => {
-        const loggedUserJSON = JSON.parse(window.localStorage.getItem(identifier))
+        const loggedUserJSON = JSON.parse(window.localStorage.getItem(identifier));
         if (loggedUserJSON) {
-            dispatch(setUser(loggedUserJSON))
+            dispatch(setUser(loggedUserJSON));
         }
-    }
-}
+    };
+};
 
-export default userSlice.reducer
+export default userSlice.reducer;
