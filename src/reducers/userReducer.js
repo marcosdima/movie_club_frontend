@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setToken } from '../utils/tokenManager';
 import userService from '../services/login';
 
 const identifier = 'loggedMovieAppUser';
@@ -8,10 +9,12 @@ const userSlice = createSlice({
     initialState: null,
     reducers: {
         setUser(state, action) {
+            setToken(action.payload.token)
             return action.payload;
         },
         reset() {
             window.localStorage.clear();
+            setToken(null);
             return null;
         }
     }
