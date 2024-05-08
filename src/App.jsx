@@ -1,7 +1,8 @@
 import MoviesDisplay from './components/MoviesDisplay'
 import MovieForm from './components/MovieForm'
 import LogIn from './components/LogIn'
-import { Routes, Route, Link, } from 'react-router-dom'
+import Logout from './components/Logout'
+import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { initialMovies } from './reducers/moviesReducer'
 import { checkLogged } from './reducers/userReducer'
@@ -21,19 +22,21 @@ function App() {
     paddingRight: 5
   }
 
-  console.log(user);
-
   return (
     <>
       <div>
         <Link style={padding} to='/movies'>Movies</Link>
         <Link style={padding} to='/movies/add'>Add Movie</Link>
-        <Link style={padding} to='/login'>Log In</Link>
+        { 
+          !user 
+          ? <Link style={padding} to='/login'>Log In</Link>
+          : <Logout /> 
+        }
       </div>
       <Routes>
-        <Route path='/movies' element={<MoviesDisplay />} />
-        <Route path='/movies/add' element={<MovieForm />} />
-        <Route path='/login' element={<LogIn />} />
+        <Route path='/movies' element={ <MoviesDisplay /> } />
+        <Route path='/movies/add' element={ user ? <MovieForm /> : <Navigate replace to="/login" /> } />
+        <Route path='/login' element={ <LogIn /> } />
       </Routes>
     </>
   )
