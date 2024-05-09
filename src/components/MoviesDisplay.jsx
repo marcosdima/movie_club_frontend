@@ -1,15 +1,23 @@
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const Movie = ({ title, imageUrl, description, director, genres }) => {
+const MovieDisplay = ({ title, imageUrl, id }) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/movies/${id}`)
+    } 
+
+    const style = {
+        flex: "1 0 5%",
+        alignItems: "center",
+        justifyContent: "center"
+    }
+
     return (
-        <div>
+        <div style={style} onClick={handleClick}>
             <h1>{title}</h1>
             <img src={imageUrl} alt={`(Image of ${title})`}/>
-            <p>Director: {director}</p>
-            <div>
-                Genres: {genres.join(', ')}
-            </div>
-            <p>Description: {description}</p>
         </div>
     );
 };
@@ -17,11 +25,16 @@ const Movie = ({ title, imageUrl, description, director, genres }) => {
 const MoviesDisplay = () => {
     const movies = useSelector(state => state.movies);
 
+    const style = {
+        display: 'flex',
+        flexWrap: 'wrap',
+    }
+
     return (
-        <div>
+        <div style={style}>
         {
-            movies.map(movie =>
-                <Movie key={movie.id} {...movie} />
+            movies.map(({ title, imageUrl, id }) =>
+                <MovieDisplay key={id} title={title} imageUrl={imageUrl} id={id} />
             )
         }
         </div>
