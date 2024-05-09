@@ -1,6 +1,6 @@
 let token = null;
 
-const setToken = (newToken,) => {
+const setToken = (newToken) => {
   token = newToken;
 };
 
@@ -9,7 +9,7 @@ const getToken = () => {
 };
 
 const config = () => {
-  return {headers: { Authorization: getToken(), },};
+  return {headers: { Authorization: getToken() }};
 };
 
 export {

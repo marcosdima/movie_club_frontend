@@ -1,5 +1,5 @@
-import { createSlice, } from "@reduxjs/toolkit";
-import { setToken, } from '../utils/tokenManager';
+import { createSlice } from "@reduxjs/toolkit";
+import { setToken } from '../utils/tokenManager';
 import userService from '../services/login';
 
 const identifier = 'loggedMovieAppUser';
@@ -8,39 +8,39 @@ const userSlice = createSlice({
   name: 'user',
   initialState: null,
   reducers: {
-    setUser(state, action,) {
-      setToken(action.payload.token,);
+    setUser(state, action) {
+      setToken(action.payload.token);
       return action.payload;
     },
     reset() {
       window.localStorage.clear();
-      setToken(null,);
+      setToken(null);
       return null;
     },
   },
-},);
+});
 
-const { setUser, } = userSlice.actions;
-export const { reset, } = userSlice.actions;
+const { setUser } = userSlice.actions;
+export const { reset } = userSlice.actions;
 
-export const login = (username, password,) => {
-  return async (dispatch,) => {
-    const userLogin = await userService.login(username, password,);
+export const login = (username, password) => {
+  return async (dispatch) => {
+    const userLogin = await userService.login(username, password);
            
     window.localStorage.setItem(
       identifier,
-      JSON.stringify(userLogin,),
+      JSON.stringify(userLogin)
     );
 
-    dispatch(setUser(userLogin,),);
+    dispatch(setUser(userLogin));
   };
 };
 
 export const checkLogged = () => {
-  return async (dispatch,) => {
-    const loggedUserJSON = JSON.parse(window.localStorage.getItem(identifier,),);
+  return async (dispatch) => {
+    const loggedUserJSON = JSON.parse(window.localStorage.getItem(identifier));
     if (loggedUserJSON) {
-      dispatch(setUser(loggedUserJSON,),);
+      dispatch(setUser(loggedUserJSON));
     }
   };
 };
