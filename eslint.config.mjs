@@ -12,15 +12,17 @@ export default [
         "ImportDeclaration": { "multiline": true, "minProperties": 3 },
         "ExportDeclaration": { "multiline": true, "minProperties": 3 }
       }],
-      "no-multiple-empty-lines": "error"
+      "no-multiple-empty-lines": "error",
+      "comma-dangle": ["error", "always"],
+      "arrow-parens": ["error", "always"],
     },
     languageOptions: {
-      sourceType: "module"
+      sourceType: "module",
     }
   },
   {
     languageOptions: { 
-      globals: globals.browser 
+      globals: globals.browser ,
     }
   },
 ];
