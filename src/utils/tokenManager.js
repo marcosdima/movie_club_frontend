@@ -9,9 +9,9 @@ const getToken = () => {
 };
 
 const config = () => {
-  return {
-      headers: { Authorization: getToken() }
-  };
+  return {headers: { Authorization: getToken() }};
 };
 
-export { setToken, getToken, config };
+export {
+  setToken, getToken, config 
+};

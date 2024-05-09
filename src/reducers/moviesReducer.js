@@ -6,13 +6,13 @@ const moviesSlice = createSlice({
   initialState: [],
   reducers: {
     appendMovie(state, action) {
-        return state.concat(action.payload);
+      return state.concat(action.payload);
     },
     setMovies(state, action) {
-        return action.payload;
+      return action.payload;
     },
     reset() {
-        return [];
+      return [];
     }
   }
 });
