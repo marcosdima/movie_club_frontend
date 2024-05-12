@@ -9,13 +9,17 @@ const groupsSlice = createSlice({
     setGroups(state, action) {
       return action.payload;
     },
+    addGroup(state, action) {
+      const newGroup = action.payload;
+      return state.concat(newGroup)
+    },
     reset() {
       return [];
     },
   },
 });
 
-export const { reset } = groupsSlice.actions;
+export const { reset, addGroup } = groupsSlice.actions;
 const { setGroups } = groupsSlice.actions;
 
 export const initialGroups = () => {

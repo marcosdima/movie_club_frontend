@@ -7,8 +7,8 @@ const getGroups = async () => {
   return data;
 };
 
-const create = async (newGroup) => {
-  const { data } = await axios.post(baseURl, newGroup, config());
+const create = async (groupName) => {
+  const { data } = await axios.post(baseURl, { groupName }, config());
   return data;
 };
 

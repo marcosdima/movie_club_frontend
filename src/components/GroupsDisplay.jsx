@@ -1,3 +1,4 @@
+import GroupForm from "./GroupForm";
 import { useSelector } from "react-redux";
 
 const Group = ({ name, members, movies }) => {
@@ -25,6 +26,7 @@ const GroupsDisplay = () => {
     return (
         <div>
             { formattedGroups.map(group => <Group key={ group.id } { ...group }/>) }
+            <GroupForm />
         </div>
     );
 };
