@@ -3,25 +3,47 @@ import MovieForm from './components/MovieForm'
 import LogIn from './components/LogIn'
 import Logout from './components/Logout'
 import GroupsDisplay from './components/GroupsDisplay'
+import Group from './components/Group'
 import Movie from './components/Movie'
-import { Routes, Route, Link, Navigate, useMatch } from 'react-router-dom'
+import { Routes, Route, Link, Navigate, useMatch, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { initialMovies } from './reducers/moviesReducer'
-import { checkLogged } from './reducers/userReducer'
+import { checkLogged, reset } from './reducers/userReducer'
 import { useEffect } from 'react'
 import { initialGroups } from './reducers/groupsReducer'
+import { getToken } from './utils/tokenManager'
+
+const tokenExpired = () => {
+  const decodeToken = (token) => {
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    return decodedToken;
+  }
+  const token = getToken();
+  if (!token) return false;
+  const decodedToken = decodeToken(token);
+  const expirationDate = new Date(decodedToken.exp * 1000);
+  const now = new Date();
+  return expirationDate < now
+}
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector(state => state.user);
   const movies = useSelector(state => state.movies);
-
+  const group = useSelector(state => state.group);
+  
   // Sets initial data...
   useEffect(() => {
     dispatch(initialMovies());
     dispatch(checkLogged());
-    dispatch(initialGroups());
   }, [])
+
+  // Checks if the token expired...
+  if (tokenExpired()) {
+    dispatch(reset());
+    navigate('/login');
+  }
 
   // Gets the movie at the url id...
   const movieId = useMatch('/movies/:id');
@@ -35,6 +57,7 @@ function App() {
     return (
       <>     
         <Link style={padding} to='/groups'>Groups</Link>
+        {group ? <Link style={padding} to='/group'>{group.name}</Link> : <></>}
         <Logout /> 
       </>
     );
@@ -57,6 +80,7 @@ function App() {
         <Route path='/movies/add' element={user ? <MovieForm /> : <Navigate replace to="/login" />} />
         <Route path='/login' element={<LogIn />} />
         <Route path='/groups' element={<GroupsDisplay />} />
+        <Route path='/group' element={<Group />} />
       </Routes>
     </>
   )
