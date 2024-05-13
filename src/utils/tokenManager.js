@@ -4,12 +4,14 @@ const setToken = (newToken) => {
   token = newToken;
 };
 
-const getToken = () => {
-  return `Bearer ${token}` ;
-};
+const getToken= () => token;
 
 const config = () => {
-  return {headers: { Authorization: getToken() }};
+  return {
+    headers: { 
+      Authorization: `Bearer ${token}` 
+    }
+  };
 };
 
 export {
