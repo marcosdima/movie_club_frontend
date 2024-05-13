@@ -4,13 +4,13 @@ import { addGroup } from "./groupsReducer";
 
 const groupSlice = createSlice({
   name: 'groups',
-  initialState: {},
+  initialState: null,
   reducers: {
     setGroup(state, action) {
       return action.payload;
     },
     reset() {
-      return [];
+      return null;
     },
   },
 });
