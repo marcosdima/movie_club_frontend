@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ActivityForm from "./ActivityForm";
 
 const Group = () => {
     const navigate = useNavigate()
@@ -15,12 +16,16 @@ const Group = () => {
 
     const members = () => group.members.map((member) => member.username).join(',');
     const titles = () => {
+        const margin = {
+            marginLeft: 10
+        };
         const ids = group.history.map((activity) => activity.movie);
         const groupMovies = movies
             .filter((movie) => ids.includes(movie.id))
-            .map(({ title }) => title);
-        const result = groupMovies.join(', ');
-        return result || 'Empty'
+            .map(({ title, id }) => <Link style={margin} key={id} to={`/movies/${id}`}>{title}</Link>);
+        return groupMovies.length > 0
+            ? groupMovies
+            : 'Empty'
     }
 
     return (
@@ -28,6 +33,7 @@ const Group = () => {
             <div>Name: {group.name}</div>
             <div>Members: {members()}</div>
             <div>Movies to watch: {titles()}</div>
+            <ActivityForm values={movies} groupId={group.id}></ActivityForm>
         </>
     );
 };
