@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Selector from "./tools/Selector";
-import activitiesService from "../services/activities";
+import genericService from "../services/genericService";
 import { removeByIds } from "../utils/functions";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewActivty } from "../reducers/groupReducer";
@@ -15,7 +15,7 @@ const ActivityForm = () => {
 
     const createAnActity = async () => {
         if (!movieSelected) return null;
-        const data = await activitiesService.create(movieSelected.id, group.id);
+        const data = await genericService.create("activities", { movieId: movieSelected.id, groupId: group.id });
         dispatch(addNewActivty(data));
         setMovie(null);
     }
