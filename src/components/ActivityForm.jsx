@@ -2,22 +2,26 @@ import { useState } from "react";
 import Selector from "./tools/Selector";
 import activitiesService from "../services/activities";
 import { removeByIds } from "../utils/functions";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewActivty } from "../reducers/groupReducer";
 
-const ActivityForm = ({ values }) => {
+const ActivityForm = () => {
     const [movieSelected, setMovie] = useState(null);
+    const dispatch = useDispatch();
     const group = useSelector((state) => state.group);
+    const movies = useSelector((state) => state.movies);
 
-    const setById = (target) => setMovie(values.find(({id}) => id === target));
+    const setById = (target) => setMovie(movies.find(({id}) => id === target));
 
     const createAnActity = async () => {
         if (!movieSelected) return null;
         const data = await activitiesService.create(movieSelected.id, group.id);
-        console.log(data);
+        dispatch(addNewActivty(data));
+        setMovie(null);
     }
 
     // Remove the movies that already were added as an activity...
-    const moviesFiltered = removeByIds(values, group.history.map(({ movie }) => movie));
+    const moviesFiltered = removeByIds(movies, group.history.map(({ movie }) => movie));
 
     return (
         <>

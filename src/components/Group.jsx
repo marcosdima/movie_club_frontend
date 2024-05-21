@@ -33,7 +33,7 @@ const Group = () => {
             <div>Name: {group.name}</div>
             <div>Members: {members()}</div>
             <div>Movies to watch: {titles()}</div>
-            <ActivityForm values={movies} groupId={group.id}></ActivityForm>
+            <ActivityForm />
         </>
     );
 };
