@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import groupsService from "../services/groups";
-import userReducer from "./userReducer";
+import genericService from "../services/genericService";
 
 const groupsSlice = createSlice({
   name: 'groups',
@@ -24,7 +23,7 @@ const { setGroups } = groupsSlice.actions;
 
 export const initialGroups = () => {
   return async (dispatch) => {
-    const groups = await groupsService.getGroups();
+    const groups = await genericService.getAll('groups');
     dispatch(setGroups(groups));
   };
 };
