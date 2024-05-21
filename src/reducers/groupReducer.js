@@ -3,11 +3,18 @@ import groupsService from '../services/groups';
 import { addGroup } from "./groupsReducer";
 
 const groupSlice = createSlice({
-  name: 'groups',
+  name: 'group',
   initialState: null,
   reducers: {
     setGroup(state, action) {
       return action.payload;
+    },
+    addNewActivty(state, { payload }) {
+      const history = state.history.concat(payload);
+      return {
+        ...state,
+        history
+      };
     },
     reset() {
       return null;
@@ -15,7 +22,7 @@ const groupSlice = createSlice({
   },
 });
 
-export const { reset, setGroup } = groupSlice.actions;
+export const { reset, setGroup, addNewActivty } = groupSlice.actions;
 
 export const createGroup = (groupName) => {
     return async dispatch => {
