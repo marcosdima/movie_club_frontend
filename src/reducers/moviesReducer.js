@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import movieService from "../services/movies";
+import genericService from "../services/genericService";
 
 const moviesSlice = createSlice({
   name: 'movies',
@@ -22,13 +22,13 @@ export const { setMovies, reset } = moviesSlice.actions;
 
 export const addMovie = (content) => {
   return async (dispatch) => {
-    const movie = await movieService.add(content);
+    const movie = await genericService.create('movies', content);
     dispatch(appendMovie(movie));
   };
 };
 export const initialMovies = () => {
   return async (dispatch) => {
-    const movies = await movieService.getAll();
+    const movies = await genericService.getAll('movies');
     dispatch(setMovies(movies));
   };
 };
