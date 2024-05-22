@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import ActivityForm from "./ActivityForm";
+import Invitation from "./Invitation";
 
 const Group = () => {
     const navigate = useNavigate()
@@ -34,6 +35,7 @@ const Group = () => {
             <div>Members: {members()}</div>
             <div>Movies to watch: {titles()}</div>
             <ActivityForm />
+            <Invitation />
         </>
     );
 };
