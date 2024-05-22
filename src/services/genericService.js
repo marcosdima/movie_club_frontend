@@ -4,12 +4,12 @@ import { config } from "../utils/tokenManager";
 const baseUrl = '/api';
 
 const getAll = async (path) => {
-    const { data } = await axios.get(`${baseUrl}/${path}`);
+    const { data } = await axios.get(`${baseUrl}/${path}`, config());
     return data;
 };
 
 const getById = async (path, id) => {
-    const { data } = await axios.get(`${baseUrl}/${path}/${id}`);
+    const { data } = await axios.get(`${baseUrl}/${path}/${id}`, config());
     return data;
 }
 
