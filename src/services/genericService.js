@@ -18,4 +18,9 @@ const create =  async (path, newObject) => {
     return data;
 };
 
-export default { getAll, create, getById };
+const update = async (path, id, updatedObject) => {
+    const { data } = await axios.put(`${baseUrl}/${path}/${id}`, updatedObject, config());
+    return data;
+}
+
+export default { getAll, create, getById, update };
