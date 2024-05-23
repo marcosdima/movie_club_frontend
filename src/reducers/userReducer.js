@@ -12,7 +12,7 @@ const userSlice = createSlice({
       setToken(action.payload.token);
       return action.payload;
     },
-    reset() {
+    resetUser() {
       window.localStorage.clear();
       setToken(null);
       return null;
@@ -21,7 +21,7 @@ const userSlice = createSlice({
 });
 
 const { setUser } = userSlice.actions;
-export const { reset } = userSlice.actions;
+export const { resetUser } = userSlice.actions;
 
 export const login = (username, password) => {
   return async (dispatch) => {

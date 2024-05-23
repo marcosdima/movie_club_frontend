@@ -8,7 +8,7 @@ import Movie from './components/Movie'
 import { Routes, Route, Link, Navigate, useMatch, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { initialMovies } from './reducers/moviesReducer'
-import { checkLogged, reset } from './reducers/userReducer'
+import { checkLogged, resetUser } from './reducers/userReducer'
 import { useEffect } from 'react'
 import { getToken } from './utils/tokenManager'
 import InvitationsDisplay from './components/InvitationsDisplay'
@@ -41,7 +41,7 @@ function App() {
 
   // Checks if the token expired...
   if (tokenExpired()) {
-    dispatch(reset());
+    dispatch(resetUser());
     navigate('/login');
   }
 

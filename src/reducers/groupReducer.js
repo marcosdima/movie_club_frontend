@@ -16,13 +16,13 @@ const groupSlice = createSlice({
         history
       };
     },
-    reset() {
+    resetGroup() {
       return null;
     },
   },
 });
 
-export const { reset, setGroup, addNewActivty } = groupSlice.actions;
+export const { resetGroup, setGroup, addNewActivty } = groupSlice.actions;
 
 export const createGroup = (groupName) => {
     return async dispatch => {

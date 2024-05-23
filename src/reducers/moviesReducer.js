@@ -11,14 +11,14 @@ const moviesSlice = createSlice({
     setMovies(state, action) {
       return action.payload;
     },
-    reset() {
+    resetMovies() {
       return [];
     },
   },
 });
 
 const { appendMovie } = moviesSlice.actions;
-export const { setMovies, reset } = moviesSlice.actions;
+export const { setMovies, resetMovies } = moviesSlice.actions;
 
 export const addMovie = (content) => {
   return async (dispatch) => {

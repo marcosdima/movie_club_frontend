@@ -11,7 +11,7 @@ const usersSlice = createSlice({
     addUser(state, { payload }) {
         return state.concat(payload)
     },
-    reset() {
+    resetUsers() {
       return [];
     },
   },

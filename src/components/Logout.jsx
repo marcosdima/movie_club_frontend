@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
-import { reset } from "../reducers/userReducer";
+import { resetUser } from "../reducers/userReducer";
+import { resetGroups } from "../reducers/groupsReducer";
+import { resetGroup } from "../reducers/groupReducer";
 import { useNavigate } from "react-router-dom";
 
 const Logout = () => {
@@ -7,7 +9,9 @@ const Logout = () => {
     const navigate = useNavigate();
 
     const logout = () => {
-        dispatch(reset());
+        dispatch(resetUser());
+        dispatch(resetGroups());
+        dispatch(resetGroup());
         navigate('/login');
     }
 
