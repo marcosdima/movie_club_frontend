@@ -10,8 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { initialMovies } from './reducers/moviesReducer'
 import { checkLogged, reset } from './reducers/userReducer'
 import { useEffect } from 'react'
-import { initialGroups } from './reducers/groupsReducer'
 import { getToken } from './utils/tokenManager'
+import InvitationsDisplay from './components/InvitationsDisplay'
 
 const tokenExpired = () => {
   const decodeToken = (token) => {
@@ -56,8 +56,10 @@ function App() {
   const afterLogged = () => {
     return (
       <>     
+        <Link style={padding} to='/movies/add'>Add Movie</Link>
+        <Link style={padding} to='/invitations'>Invitations</Link>
         <Link style={padding} to='/groups'>Groups</Link>
-        {group ? <Link style={padding} to='/group'>{group.name}</Link> : <></>}
+        { group ? <Link style={padding} to='/group'>{group.name}</Link> : <></> }
         <Logout /> 
       </>
     );
@@ -67,7 +69,6 @@ function App() {
     <>
       <div>
         <Link style={padding} to='/movies'>Movies</Link>
-        <Link style={padding} to='/movies/add'>Add Movie</Link>
         { 
           !user 
           ? <Link style={padding} to='/login'>Log In</Link>
@@ -81,6 +82,7 @@ function App() {
         <Route path='/login' element={<LogIn />} />
         <Route path='/groups' element={<GroupsDisplay />} />
         <Route path='/group' element={<Group />} />
+        <Route path='/invitations' element={<InvitationsDisplay />} />
       </Routes>
     </>
   )
