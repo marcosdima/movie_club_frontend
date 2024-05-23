@@ -9,7 +9,7 @@ const getToken= () => token;
 const config = () => {
   return {
     headers: { 
-      Authorization: `Bearer ${token}` 
+      Authorization: token ? `Bearer ${token}` : ''
     }
   };
 };
