@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
-import { initialUsers } from "../reducers/usersReducer";
 import Selector from "./tools/Selector";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import genericService from "../services/genericService";
 
 const Invitation = () => {
     const [target, setTarget] = useState(null);
-    const dispatch = useDispatch();
     const users = useSelector((state) => state.users);
     const user = useSelector((state) => state.user);
     const group = useSelector((state) => state.group);
-
-    useEffect(() => {
-        dispatch(initialUsers())
-    }, [])
 
     const setById = (target) => setTarget(users.find(({id}) => id === target));
     const handleInvitation = async () => {
@@ -21,12 +15,16 @@ const Invitation = () => {
         try {
             await genericService.create('invitations', { from: user.id, to: target.id, groupId: group.id});
         } catch(error) {
-            console.log(error);
+            console.log(error.response.data.error);
         }
+        setTarget(null);
     };
 
     // Filter the users that are already members of the group...
     const usersFiltered = users.filter(({ id }) => !group.members.includes(id));
+
+    // If there are no user left to invite...
+    if (usersFiltered.length === 0) return <></>
 
     // Formatted the values to be sended to Selector...
     const formattedValues = usersFiltered.map(({ username, id }) => ({ title: username, id }));
