@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { setGroup } from "../reducers/groupReducer";
-import { initialGroups } from "../reducers/groupsReducer";
 import GroupForm from "./GroupForm";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const Group = ({ name, members, movies, id, handleClick }) => {
     return (
@@ -24,10 +22,6 @@ const GroupsDisplay = () => {
         dispatch(setGroup(groups.find((group) => group.id === id)));
         navigate('/group');
     }
-
-    useEffect(() => {
-        dispatch(initialGroups());
-    }, [])
 
     const formattedGroups = groups.map(({ name, members, history, id }) => {
         return {
