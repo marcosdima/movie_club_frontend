@@ -10,7 +10,7 @@ const groupsSlice = createSlice({
     },
     addGroup(state, action) {
       const newGroup = action.payload;
-      return state.concat(newGroup)
+      return state.concat(newGroup);
     },
     resetGroups() {
       return [];

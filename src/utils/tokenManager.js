@@ -7,11 +7,7 @@ const setToken = (newToken) => {
 const getToken= () => token;
 
 const config = () => {
-  return {
-    headers: { 
-      Authorization: token ? `Bearer ${token}` : ''
-    }
-  };
+  return {headers: {Authorization: token ? `Bearer ${token}` : ''}};
 };
 
 export {

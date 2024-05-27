@@ -11,7 +11,7 @@ const store = configureStore({
     user: userReducer,
     users: usersReducer,
     groups: groupsReducer,
-    group: groupReducer
+    group: groupReducer,
   },
 });
 
