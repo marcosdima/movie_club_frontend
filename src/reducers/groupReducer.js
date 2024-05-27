@@ -9,7 +9,7 @@ const groupSlice = createSlice({
     setGroup(state, action) {
       return action.payload;
     },
-    addNewActivty(state, { payload }) {
+    addNewActivity(state, { payload }) {
       const history = state.history.concat(payload);
       return {
         ...state,
@@ -22,7 +22,7 @@ const groupSlice = createSlice({
   },
 });
 
-export const { resetGroup, setGroup, addNewActivty } = groupSlice.actions;
+export const { resetGroup, setGroup, addNewActivity } = groupSlice.actions;
 
 export const createGroup = (groupName) => {
   return async (dispatch) => {
