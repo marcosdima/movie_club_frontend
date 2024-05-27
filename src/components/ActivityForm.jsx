@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Selector from "./tools/Selector";
 import genericService from "../services/genericService";
 import { removeByIds } from "../utils/functions";
@@ -22,6 +23,12 @@ const ActivityForm = () => {
 
     // Remove the movies that already were added as an activity...
     const moviesFiltered = removeByIds(movies, group.history.map(({ movie }) => movie));
+
+    if (moviesFiltered.length === 0) return (
+        <div>
+            Ups! There are no movies left to add... <Link to='/movies/add'>Go add some!</Link>
+        </div>
+    )
 
     return (
         <>
