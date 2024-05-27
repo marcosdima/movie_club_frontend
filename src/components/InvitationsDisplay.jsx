@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addGroup } from "../reducers/groupsReducer";
 import genericService from "../services/genericService";
 import { useEffect, useState } from "react";
 
@@ -14,16 +15,18 @@ const InvitationDisplay = ({sender, groupName, id, handleInvitation}) => {
 
 const InvitationsDisplay = () => {
     const [invitations, setInvitations] = useState([]);
+    const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
 
     useEffect(() => {
         const setInitialValues = async () => setInvitations(await genericService.getAll('invitations'));
         if (user) (setInitialValues());
-    }, [])
+    }, [user])
 
     const handleInvitation = async (target, accepted) => {
         try {
-            await genericService.update('invitations', target,  { accepted });
+            const { group, accepted } = await genericService.update('invitations', target,  { accepted });
+            if (accepted) dispatch(addGroup(group));
             setInvitations(invitations.filter((inv) => inv.id !== target));
         } catch(error) {
             console.log(error.message)
