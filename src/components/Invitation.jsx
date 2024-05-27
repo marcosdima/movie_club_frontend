@@ -19,9 +19,13 @@ const Invitation = () => {
         }
         setTarget(null);
     };
+    const idIsInGroup = (id) => {
+        const ids = group.members.map(({id}) => id);
+        return ids.includes(id)
+    } 
 
     // Filter the users that are already members of the group...
-    const usersFiltered = users.filter(({ id }) => !group.members.includes(id));
+    const usersFiltered = users.filter(({ id }) => !idIsInGroup(id));
 
     // If there are no user left to invite...
     if (usersFiltered.length === 0) return <></>
