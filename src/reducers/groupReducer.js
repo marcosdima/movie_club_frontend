@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import genericService from '../services/genericService';
-import { addGroup } from "./groupsReducer";
+import { addGroup, updateGroup } from "./groupsReducer";
 
 const groupSlice = createSlice({
   name: 'group',
@@ -16,14 +16,23 @@ const groupSlice = createSlice({
         history,
       };
     },
+    updateAnActivity(state, { payload }){
+      const history = state.history.map((activity) => payload.id !== activity.id ? activity : payload);
+      return {
+        ...state,
+        history,
+      };
+    },
     resetGroup() {
       return null;
     },
   },
 });
 
-export const { resetGroup, setGroup, addNewActivity } = groupSlice.actions;
+const { updateAnActivity } = groupSlice.actions;
 
+export const { resetGroup, setGroup, addNewActivity } = groupSlice.actions;
+ 
 export const createGroup = (groupName) => {
   return async (dispatch) => {
     const newGroup = await genericService.create('groups', { groupName });
@@ -31,5 +40,12 @@ export const createGroup = (groupName) => {
     dispatch(addGroup(newGroup));
   };
 };
+
+export const updateActivity = (activityToUpdate) => {
+  return async (dispatch) => {
+    dispatch(updateGroup(activityToUpdate));
+    dispatch(updateAnActivity(activityToUpdate));
+  }
+}
 
 export default groupSlice.reducer;

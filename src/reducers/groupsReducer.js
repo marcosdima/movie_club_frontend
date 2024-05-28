@@ -12,13 +12,20 @@ const groupsSlice = createSlice({
       const newGroup = action.payload;
       return state.concat(newGroup);
     },
+    updateGroup(state, { payload }){
+      const history = state.map((group) => payload.id !== group.id ? group : payload);
+      return {
+        ...state,
+        history,
+      };
+    },
     resetGroups() {
       return [];
     },
   },
 });
 
-export const { resetGroups, addGroup } = groupsSlice.actions;
+export const { resetGroups, addGroup, updateGroup } = groupsSlice.actions;
 const { setGroups } = groupsSlice.actions;
 
 export const initialGroups = () => {
