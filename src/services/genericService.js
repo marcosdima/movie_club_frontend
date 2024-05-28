@@ -18,8 +18,8 @@ const create =  async (path, newObject) => {
   return data;
 };
 
-const update = async (path, id, updatedObject) => {
-  const { data } = await axios.put(`${baseUrl}/${path}/${id}`, updatedObject, config());
+const update = async (path, updatedObject) => {
+  const { data } = await axios.put(`${baseUrl}/${path}`, updatedObject, config());
   return data;
 };
 

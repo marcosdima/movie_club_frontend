@@ -23,9 +23,9 @@ const InvitationsDisplay = () => {
         if (user) (setInitialValues());
     }, [user])
 
-    const handleInvitation = async (target, accepted) => {
+    const handleInvitation = async (target, isAccepted) => {
         try {
-            const { group, accepted } = await genericService.update('invitations', target,  { accepted });
+            const { group, accepted } = await genericService.update(`invitations/${target}`, { accepted: isAccepted });
             if (accepted) dispatch(addGroup(group));
             setInvitations(invitations.filter((inv) => inv.id !== target));
         } catch(error) {
