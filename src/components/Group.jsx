@@ -7,7 +7,8 @@ import Invitation from "./Invitation";
 const Group = () => {
     const navigate = useNavigate()
     const group = useSelector((state) => state.group);
-    const movies = useSelector((state) => state.movies)
+    const movies = useSelector((state) => state.movies);
+    const user = useSelector((state) => state.user)
     
     useEffect(() => {
         if (!group) return navigate('/groups');
@@ -20,10 +21,15 @@ const Group = () => {
         const margin = {
             marginLeft: 10
         };
-        const ids = group.history.map((activity) => activity.movie);
+
+        const ids = group.history
+            .filter(({ watched }) => !watched.includes(user.id))
+            .map(({ movie }) => movie);
+
         const groupMovies = movies
             .filter((movie) => ids.includes(movie.id))
             .map(({ title, id }) => <Link style={margin} key={id} to={`/movies/${id}`}>{title}</Link>);
+
         return groupMovies.length > 0
             ? groupMovies
             : 'Empty'
