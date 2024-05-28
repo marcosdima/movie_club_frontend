@@ -44,12 +44,15 @@ const InvitationsDisplay = () => {
 
     return (
         <>
+            <h2>Invitations</h2>
             {
-                formattedInvitations.map(invitation =>
+                formattedInvitations.length > 0
+                ? formattedInvitations.map(invitation =>
                     <div key={invitation.id}>
                         <InvitationDisplay {...invitation} />
                     </div>
-                )
+                    )
+                : "No invitations found"
             }
         </>
     );

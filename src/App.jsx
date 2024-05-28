@@ -15,7 +15,6 @@ import { initialGroups } from './reducers/groupsReducer'
 import { initialUsers } from './reducers/usersReducer'
 import { useEffect } from 'react'
 import { getToken } from './utils/tokenManager'
-import InvitationsDisplay from './components/InvitationsDisplay'
 
 const tokenExpired = () => {
   const decodeToken = (token) => {
@@ -74,7 +73,6 @@ function App() {
     return (
       <>     
         <Link style={padding} to='/movies/add'>Add Movie</Link>
-        <Link style={padding} to='/invitations'>Invitations</Link>
         <Link style={padding} to='/groups'>Groups</Link>
         { group ? <Link style={padding} to='/group'>{group.name}</Link> : <></> }
         <Link style={padding} to={`/users/${user.username}`}>{user.username}</Link>
@@ -96,7 +94,6 @@ function App() {
       <Routes>
         <Route path='/group' element={<Group />} />
         <Route path='/groups' element={<GroupsDisplay />} />
-        <Route path='/invitations' element={<InvitationsDisplay />} />
         <Route path='/login' element={<LogIn />} />
         <Route path='/movies' element={<MoviesDisplay />} />
         <Route path='/movies/:id' element={<Movie movie={movie}/>} />
