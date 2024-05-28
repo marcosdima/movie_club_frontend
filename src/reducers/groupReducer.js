@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import genericService from '../services/genericService';
-import { addGroup, updateGroup } from "./groupsReducer";
+import { addGroup, updateActivityInGroup } from "./groupsReducer";
 
 const groupSlice = createSlice({
   name: 'group',
@@ -43,7 +43,7 @@ export const createGroup = (groupName) => {
 
 export const updateActivity = (activityToUpdate) => {
   return async (dispatch) => {
-    dispatch(updateGroup(activityToUpdate));
+    dispatch(updateActivityInGroup(activityToUpdate));
     dispatch(updateAnActivity(activityToUpdate));
   }
 }

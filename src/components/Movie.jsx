@@ -6,15 +6,17 @@ import genericService from "../services/genericService";
 const GroupActivity = ({ movieId }) => {
     const dispatch = useDispatch();
     const group = useSelector((state) => state.group);
+    const user = useSelector((state) => state.user);
 
     if (!group ) return <></>
 
     const activity = group.history.find((activity) => activity.movie === movieId);
+    const alreadyWatched = activity?.watched.includes(user.id);
 
-    const markAsWatched = async () => {
+    const changeWatchedStatus = async (status) => {
         if (!activity) return;
         try {
-            const activityWatched = await genericService.update(`activities/${activity.id}/watched`, { groupId: group.id });
+            const activityWatched = await genericService.update(`activities/${activity.id}/${status ? 'unwatched' : 'watched'}`, { groupId: group.id });
             dispatch(updateActivity(activityWatched));
         } catch(error) {
             console.log(error.response.data.error);
@@ -34,7 +36,7 @@ const GroupActivity = ({ movieId }) => {
         <>
             {
                 activity
-                ? <button onClick={() => markAsWatched()}>Watched</button>
+                ? <button onClick={() => changeWatchedStatus(alreadyWatched) }>{alreadyWatched ? 'Unwatched' : 'Watched'}</button>
                 : <button onClick={() => addToGroup()}>Add to group</button>
             }
         </>
