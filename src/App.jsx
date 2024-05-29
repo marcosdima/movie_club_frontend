@@ -1,4 +1,5 @@
 
+import Bar from './components/Bar'
 import GroupsDisplay from './components/GroupsDisplay'
 import Group from './components/Group'
 import LogIn from './components/LogIn'
@@ -7,12 +8,13 @@ import Movie from './components/Movie'
 import MoviesDisplay from './components/MoviesDisplay'
 import MovieForm from './components/MovieForm'
 import UserDisplay from './components/UserDisplay'
-import { Routes, Route, Link, Navigate, useMatch, useNavigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useMatch, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { initialMovies } from './reducers/moviesReducer'
 import { checkLogged, resetUser } from './reducers/userReducer'
 import { initialGroups } from './reducers/groupsReducer'
 import { initialUsers } from './reducers/usersReducer'
+import { resetGroup } from './reducers/groupReducer'
 import { useEffect } from 'react'
 import { getToken } from './utils/tokenManager'
 
@@ -34,7 +36,6 @@ function App() {
   const navigate = useNavigate();
   const user = useSelector(state => state.user);
   const movies = useSelector(state => state.movies);
-  const group = useSelector(state => state.group);
   const users = useSelector(state => state.users);
 
   // Sets initial data...
@@ -65,39 +66,17 @@ function App() {
   const username = useMatch('/users/:username');
   const userTarget = username ? users.find((user) => user.username === username.params.username) : null;
 
-  const padding = {
-    paddingRight: 5
-  }
-
-  const afterLogged = () => {
-    return (
-      <>     
-        <Link style={padding} to='/movies/add'>Add Movie</Link>
-        <Link style={padding} to='/groups'>Groups</Link>
-        { group ? <Link style={padding} to='/group'>{group.name}</Link> : <></> }
-        <Link style={padding} to={`/users/${user.username}`}>{user.username}</Link>
-        <Logout /> 
-      </>
-    );
-  }
-
   return (
     <>
-      <div>
-        <Link style={padding} to='/movies'>Movies</Link>
-        { 
-          !user 
-          ? <Link style={padding} to='/login'>Log In</Link>
-          : afterLogged()
-        }
-      </div>
+      <Bar />
       <Routes>
         <Route path='/group' element={<Group />} />
         <Route path='/groups' element={<GroupsDisplay />} />
         <Route path='/login' element={<LogIn />} />
+        <Route path='/logout' element={<Logout/>} />
         <Route path='/movies' element={<MoviesDisplay />} />
         <Route path='/movies/:id' element={<Movie movie={movie}/>} />
-        <Route path='/movies/add' element={user ? <MovieForm /> : <Navigate replace to="/login" />} />
+        <Route path='/movies/add' element={user ? <MovieForm /> : <Navigate replace to='/login' />} />
         <Route path='/users/:username' element={<UserDisplay user={userTarget}/>} ></Route>
       </Routes>
     </>
