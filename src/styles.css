@@ -1,0 +1,24 @@
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+} 
+
+body {
+    background-color: #d4bd9e; /* Cambia esto al color de fondo que prefieras */
+    font-family: Arial sans-serif; /* Cambia esto a la fuente que prefieras */
+}
+
+#root {
+    height: 100%;
+    border: 1px;
+}
+
+.bar {
+    background-color: #FFE8C5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0px 20px;
+}

@@ -67,7 +67,7 @@ function App() {
   const userTarget = username ? users.find((user) => user.username === username.params.username) : null;
 
   return (
-    <>
+    <div style={{ padding: 10 }}>
       <Bar />
       <Routes>
         <Route path='/group' element={<Group />} />
@@ -79,7 +79,7 @@ function App() {
         <Route path='/movies/add' element={user ? <MovieForm /> : <Navigate replace to='/login' />} />
         <Route path='/users/:username' element={<UserDisplay user={userTarget}/>} ></Route>
       </Routes>
-    </>
+    </div>
   )
 }
 

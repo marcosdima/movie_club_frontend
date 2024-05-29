@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom"
-import Button from "./tools/Button"
+import { useNavigate } from "react-router-dom";
+import Button from "./tools/Button";
 import { useSelector } from "react-redux";
 
 const Bar = () => {
@@ -66,17 +66,9 @@ const Bar = () => {
             eraseIf: notLogged,
         },
     ]
-    
-    const barStyle = {
-        backgroundColor: '#FFE8C5',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: 50,
-    }
 
     return (
-        <div style={barStyle}>
+        <div className='bar'>
             <div>{setBar(left)}</div>
             <div>{setBar(right)}</div>
         </div>
