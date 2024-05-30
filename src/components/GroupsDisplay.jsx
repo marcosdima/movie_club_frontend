@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Group = ({ name, members, movies, id, handleClick }) => {
     return (
-        <div onClick={() => handleClick(id)}>
+        <div className="group" onClick={() => handleClick(id)}>
             <h1>{ name }</h1>
             <p>
                 Members: { members } Movies: { movies }
@@ -34,10 +34,12 @@ const GroupsDisplay = () => {
     });
 
     return (
-        <div>
-            { formattedGroups.map(group => <Group key={ group.id } { ...group }/>) }
+        <>
+            <div className="group-container">
+                { formattedGroups.map(group => <Group key={ group.id } { ...group }/>) }
+            </div>
             <GroupForm />
-        </div>
+        </>
     );
 };
 
