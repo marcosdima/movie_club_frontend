@@ -22,3 +22,32 @@ body {
     height: 50px;
     padding: 0px 20px;
 }
+
+.movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 50px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+/* Movie Display corresponds to the elements in MoviesDispay component. */
+.movie-display {
+    flex: 1 0 5%;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    text-align: center;
+}
+
+.movie-display p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.movie-display img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}

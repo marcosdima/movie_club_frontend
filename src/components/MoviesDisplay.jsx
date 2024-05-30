@@ -7,17 +7,10 @@ const MovieDisplay = ({ title, imageUrl, id }) => {
     const handleClick = () => {
         navigate(`/movies/${id}`)
     } 
-
-    const style = {
-        flex: "1 0 5%",
-        alignItems: "center",
-        justifyContent: "center"
-    }
-
     return (
-        <div style={style} onClick={handleClick}>
-            <h1>{title}</h1>
+        <div className='movie-display' onClick={handleClick}>
             <img src={imageUrl} alt={`(Image of ${title})`}/>
+            <p>{title}</p>
         </div>
     );
 };
@@ -25,13 +18,9 @@ const MovieDisplay = ({ title, imageUrl, id }) => {
 const MoviesDisplay = () => {
     const movies = useSelector(state => state.movies);
 
-    const style = {
-        display: 'flex',
-        flexWrap: 'wrap',
-    }
 
     return (
-        <div style={style}>
+        <div className='movies'>
         {
             movies.map(({ title, imageUrl, id }) =>
                 <MovieDisplay key={id} title={title} imageUrl={imageUrl} id={id} />
