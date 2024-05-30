@@ -53,14 +53,14 @@ const Movie = ({ movie }) => {
     const { title, imageUrl, description, director, genres, id } = movie;
 
     return (
-        <div>
+        <div className="movie">
             <h1>{title}</h1>
-            <img src={imageUrl} alt={`(Image of ${title})`}/>
+            <p className="description">Description: {description}</p>
+            <img className="poster" src={imageUrl} alt={`(Image of ${title})`}/>
             <p>Director: {director}</p>
-            <div>
+            <p>
                 Genres: {genres.join(', ')}
-            </div>
-            <p>Description: {description}</p>
+            </p>
             <GroupActivity movieId={id}/>
         </div>
     );
