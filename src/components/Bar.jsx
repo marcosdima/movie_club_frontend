@@ -56,8 +56,8 @@ const Bar = () => {
             eraseIf: notLogged || noGroupSelected,
         },
         {
-            label: 'root',
-            to: '/users/root',
+            label: user?.name,
+            to: `/users/${user?.username}`,
             eraseIf: notLogged,
         },
         {
