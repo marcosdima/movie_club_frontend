@@ -9,7 +9,7 @@ const Item = ({ title }) => {
     )
 }
 
-const Selector = ({ values, value, setter }) => {
+const Selector = ({ values, value, setter, label="Click to display" }) => {
     const formattedValues = values
         .map(({ title, id }) => ({
             item: <Item title={title}></Item>, 
@@ -25,7 +25,7 @@ const Selector = ({ values, value, setter }) => {
     return (
         <>
             <h5>{value?.title}</h5>
-            <Toggle label="Click to display" style={style}>
+            <Toggle label={label} style={style}>
                 <Table items={formattedValues} onClickItems={setter}></Table>
             </Toggle>
         </>

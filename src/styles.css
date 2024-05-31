@@ -5,8 +5,8 @@ html, body, #root {
 } 
 
 body {
-    background-color: #d4bd9e; /* Cambia esto al color de fondo que prefieras */
-    font-family: Arial sans-serif; /* Cambia esto a la fuente que prefieras */
+    background-color: #d4bd9e;
+    font-family: Arial sans-serif;
 }
 
 #root {
@@ -15,6 +15,7 @@ body {
 }
 
 .bar {
+    border-radius: 10px;
     background-color: #FFE8C5;
     border-radius: 10px;
     display: flex;
@@ -22,6 +23,26 @@ body {
     align-items: center;
     height: 50px;
     padding: 0px 20px;
+}
+
+.toggle {
+    background-color: #FFE8C5;
+    border: solid #FFA27F;
+    border-radius: 100px;
+    padding: 0.5vw 20vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .toggle-button { 
+        border: solid;
+        border-radius: 100%;
+        background-color: transparent;
+    }
+}
+
+.group-from {
+    padding: 10px;
 }
 
 /* Movie Display Container */
@@ -39,21 +60,23 @@ body {
     justify-content: center;
     margin: 10px;
     text-align: center;
+    cursor: pointer;
+
+    p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+    }
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
 }
 
-.movie-display p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0;
-}
-
-.movie-display img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-}
-
+/* Movie Component */
 .movie {
     display: grid;
     padding: 20px;
@@ -74,9 +97,9 @@ body {
 /* Groups Display */
 .group-container {
     display: flex;
-    direction: column;
 }
 
+/* Individual Group Display */
 .group {
     margin: 10px;
     padding: 10px;
@@ -84,4 +107,5 @@ body {
     border-radius: 30px;
     text-align: center;
     background-color: #FFE8C5;
+    cursor: pointer;
 }

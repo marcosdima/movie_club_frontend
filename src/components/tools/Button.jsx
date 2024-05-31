@@ -8,6 +8,7 @@ const Button = ({ label, mouseOnColor, color, onClick }) => {
         width: 'fit-content',
         padding: 10,
         fontFamily: 'sans-serif',
+        cursor: 'pointer',
     };
 
     const changeColor = () => background === color ? setBackground(mouseOnColor) : setBackground(color)

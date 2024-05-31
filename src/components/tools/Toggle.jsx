@@ -3,20 +3,16 @@ import { useState } from "react";
 const Toggle = ({ label, children }) => {
     const [visible, changeVisibility] = useState(false);
 
-    const style = {
-        display: 'flex'
-    }
-
     const handleClick = () => changeVisibility(!visible);
 
     return (
-        <div style={style}>
+        <div className="toggle">
             {
                 visible
                 ? children
                 : <p>{label}</p>
             }
-            <button onClick={handleClick}>↓</button>
+            <button className="toggle-button" onClick={handleClick}>{visible ? '↑' : '↓'}</button>
         </div>
     )
 };
