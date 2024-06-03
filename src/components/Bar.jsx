@@ -62,7 +62,7 @@ const Bar = () => {
         },
         {
             label: user?.name,
-            to: `/users/${user?.username}`,
+            to: `/users/${user?.id}`,
             eraseIf: notLogged,
         },
         {

@@ -63,8 +63,8 @@ function App() {
   const movie = movieId ? movies.find((movie) => movie.id === movieId.params.id) : null;
 
   // Gets the username at the url id...
-  const username = useMatch('/users/:username');
-  const userTarget = username ? users.find((user) => user.username === username.params.username) : null;
+  const userId = useMatch('/users/:id');
+  const userTarget = userId ? users.find((user) => user.id === userId.params.id) : null;
 
   return (
     <div style={{ padding: 10 }}>
@@ -78,7 +78,7 @@ function App() {
         <Route path='/movies/:id' element={<Movie movie={movie}/>} />
         <Route path='/movies/add' element={user ? <MovieForm /> : <Navigate replace to='/login' />} />
         <Route path='/sign' element={<SignIn />} />
-        <Route path='/users/:username' element={<UserDisplay user={userTarget}/>} ></Route>
+        <Route path='/users/:id' element={<UserDisplay user={userTarget}/>} ></Route>
       </Routes>
     </div>
   )
