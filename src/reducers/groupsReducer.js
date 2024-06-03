@@ -12,11 +12,22 @@ const groupsSlice = createSlice({
       const newGroup = action.payload;
       return state.concat(newGroup);
     },
-    updateGroup(state, { payload }){
+    updateGroup(state, { payload }) {
       const stateUpdated = state.map((group) => payload.id !== group.id ? group : payload);
       return stateUpdated
     },
-    updateActivityInGroup(state, { payload }){
+    addActivityInGroup(state, { payload }) {
+      const stateUpdated = state.map((group) => (
+        payload.group !== group.id
+        ? group
+        : { 
+            ...group, 
+            history: group.history.concat(payload)
+          }
+      ));
+      return stateUpdated;
+    },
+    updateActivityInGroup(state, { payload }) {
       const stateUpdated = state.map((group) => (
         payload.group !== group.id
         ? group
@@ -33,7 +44,7 @@ const groupsSlice = createSlice({
   },
 });
 
-export const { resetGroups, addGroup, updateGroup, updateActivityInGroup } = groupsSlice.actions;
+export const { resetGroups, addGroup, updateGroup, updateActivityInGroup, addActivityInGroup } = groupsSlice.actions;
 const { setGroups } = groupsSlice.actions;
 
 export const initialGroups = () => {

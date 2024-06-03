@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { updateActivity } from "../reducers/groupReducer";
-import { addNewActivity } from "../reducers/groupReducer";
+import { addActivity } from "../reducers/groupReducer";
 import genericService from "../services/genericService";
 
 const GroupActivity = ({ movieId }) => {
@@ -26,7 +26,7 @@ const GroupActivity = ({ movieId }) => {
     const addToGroup = async () => {
         try {
             const data = await genericService.create("activities", { movieId, groupId: group.id });
-            dispatch(addNewActivity(data));
+            dispatch(addActivity(data));
         } catch(error) {
             console.log(error);
         }
