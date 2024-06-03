@@ -113,8 +113,10 @@ body {
         padding-left: 100px;
     }
 
-    p {
-        text-align: end;
+    .info {
         padding-right: 100px;
+        display: flex;
+        justify-content: end;
+        align-items: center;
     }
 }
