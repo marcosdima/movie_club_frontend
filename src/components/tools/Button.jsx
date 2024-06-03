@@ -7,7 +7,6 @@ const Button = ({ label, mouseOnColor, color, onClick }) => {
         backgroundColor: background,
         width: 'fit-content',
         padding: 10,
-        fontFamily: 'sans-serif',
         cursor: 'pointer',
     };
 

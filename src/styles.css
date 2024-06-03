@@ -6,7 +6,7 @@ html, body, #root {
 
 body {
     background-color: #d4bd9e;
-    font-family: Arial sans-serif;
+    font-family: sans-serif;
 }
 
 #root {
@@ -97,6 +97,7 @@ body {
 /* Groups Display */
 .group-container {
     display: flex;
+    flex-direction: column;
 }
 
 /* Individual Group Display */
@@ -105,7 +106,15 @@ body {
     padding: 10px;
     border: solid #FFA27F;
     border-radius: 30px;
-    text-align: center;
     background-color: #FFE8C5;
     cursor: pointer;
+
+    h1 {
+        padding-left: 100px;
+    }
+
+    p {
+        text-align: end;
+        padding-right: 100px;
+    }
 }
