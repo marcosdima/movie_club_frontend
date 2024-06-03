@@ -7,7 +7,7 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 
 const Group = ({ name, members, movies, id, handleClick }) => {
     return (
-        <div className="group" onClick={() => handleClick(id)}>
+        <div className="group-display" onClick={() => handleClick(id)}>
             <h1>{ name }</h1>
             <p className="info">
                 <PersonIcon />{ members } <LocalMoviesIcon /> { movies }

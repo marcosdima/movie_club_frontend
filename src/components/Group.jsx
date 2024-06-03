@@ -36,13 +36,13 @@ const Group = () => {
     }
 
     return (
-        <>
-            <div>Name: {group.name}</div>
+        <div className="group">
+            <h1>{group.name}</h1>
             <div>Members: {members()}</div>
             <div>Movies to watch: {titles()}</div>
             <ActivityForm />
             <Invitation />
-        </>
+        </div>
     );
 };
 
