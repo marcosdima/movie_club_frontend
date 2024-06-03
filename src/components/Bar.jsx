@@ -39,6 +39,11 @@ const Bar = () => {
             eraseIf: !notLogged,
         },
         {
+            label: 'Sign In',
+            to: '/sign',
+            eraseIf: !notLogged,
+        },
+        {
             label: 'Add Movie',
             to: '/movies/add',
             eraseIf: notLogged,

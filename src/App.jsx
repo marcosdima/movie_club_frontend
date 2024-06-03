@@ -7,6 +7,7 @@ import Logout from './components/Logout'
 import Movie from './components/Movie'
 import MoviesDisplay from './components/MoviesDisplay'
 import MovieForm from './components/MovieForm'
+import SignIn from './components/SignIn'
 import UserDisplay from './components/UserDisplay'
 import { Routes, Route, Navigate, useMatch, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,7 +15,6 @@ import { initialMovies } from './reducers/moviesReducer'
 import { checkLogged, resetUser } from './reducers/userReducer'
 import { initialGroups } from './reducers/groupsReducer'
 import { initialUsers } from './reducers/usersReducer'
-import { resetGroup } from './reducers/groupReducer'
 import { useEffect } from 'react'
 import { getToken } from './utils/tokenManager'
 
@@ -77,6 +77,7 @@ function App() {
         <Route path='/movies' element={<MoviesDisplay />} />
         <Route path='/movies/:id' element={<Movie movie={movie}/>} />
         <Route path='/movies/add' element={user ? <MovieForm /> : <Navigate replace to='/login' />} />
+        <Route path='/sign' element={<SignIn />} />
         <Route path='/users/:username' element={<UserDisplay user={userTarget}/>} ></Route>
       </Routes>
     </div>
