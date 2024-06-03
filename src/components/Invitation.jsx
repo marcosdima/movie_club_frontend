@@ -8,6 +8,7 @@ const Invitation = () => {
     const users = useSelector((state) => state.users);
     const user = useSelector((state) => state.user);
     const group = useSelector((state) => state.group);
+    const groupMembersId = group.members.map(({id}) => id);
 
     const setById = (target) => setTarget(users.find(({id}) => id === target));
     const handleInvitation = async () => {
@@ -19,13 +20,9 @@ const Invitation = () => {
         }
         setTarget(null);
     };
-    const idIsInGroup = (id) => {
-        const ids = group.members.map(({id}) => id);
-        return ids.includes(id)
-    } 
 
     // Filter the users that are already members of the group...
-    const usersFiltered = users.filter(({ id }) => !idIsInGroup(id));
+    const usersFiltered = users.filter(({ id }) => !groupMembersId.includes(id));
 
     // If there are no user left to invite...
     if (usersFiltered.length === 0) return <></>
