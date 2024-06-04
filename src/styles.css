@@ -45,6 +45,35 @@ body {
     padding: 10px;
 }
 
+.invitation {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.selector-simple {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    input {
+        width: 100px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-color: transparent;
+        border: solid #FFA27F;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .element {
+        padding: 2px;
+        cursor: pointer;
+        width: fit-content;
+    }
+}
+
 /* Movie Display Container */
 .movies {
     display: grid;

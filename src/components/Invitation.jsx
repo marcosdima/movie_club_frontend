@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
-import Selector from "./tools/Selector";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import genericService from "../services/genericService";
+import SelectorSimple from "./tools/SelectorSimple"
+import DoneIcon from '@mui/icons-material/Done';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Invitation = () => {
     const [target, setTarget] = useState(null);
@@ -28,23 +30,22 @@ const Invitation = () => {
     if (usersFiltered.length === 0) return <></>
 
     // Formatted the values to be sended to Selector...
-    const formattedValues = usersFiltered.map(({ username, id }) => ({ title: username, id }));
-    
-    // Handle if the message of invitation has to be visible...
-    const show = {
-        display: !target ? 'none' : ''
-    };
+    const formattedValues = usersFiltered.map(({ username, id }) => ({ key: username, id }));
 
     return (
         <>
-            <h1>Invitation</h1>
-            <h3>Select an user...</h3>
-            <Selector value={target} values={formattedValues} setter={setById}/>
-            <p style={show}>
-                Do you want invite to {target?.username}?
-                <button onClick={() => handleInvitation()}>✓</button>
-                <button onClick={() => setTarget(null)}>x</button>
-            </p>
+            <div className="invitation">
+                Do you want invite 
+                <SelectorSimple
+                    placeHolder={'name'}
+                    values={formattedValues}
+                    setter={setById}
+                    /> ?
+            </div> 
+            <span style={{display: target ? '' : 'none'}}>
+                <DoneIcon onClick={() => handleInvitation()} />
+                <CloseIcon onClick={() => setTarget(null)} />
+            </span>
         </>
     );
 }
