@@ -17,13 +17,14 @@ const Group = () => {
     if (!group) return <></>
 
     const members = () => group.members.map((member) => member.username).join(',');
-    const titles = () => {
+
+    const filterMovies = (setWatched=false) => {
         const margin = {
             marginLeft: 10
         };
 
         const ids = group.history
-            .filter(({ watched }) => !watched.includes(user.id))
+            .filter(({ watched }) => setWatched ? watched.includes(user.id) : !watched.includes(user.id))
             .map(({ movie }) => movie);
 
         const groupMovies = movies
@@ -39,7 +40,8 @@ const Group = () => {
         <div className="group">
             <h1>{group.name}</h1>
             <div>Members: {members()}</div>
-            <div>Movies to watch: {titles()}</div>
+            <div>Movies to watch: {filterMovies()}</div>
+            <div>Movies watched: {filterMovies(true)}</div>
             <ActivityForm />
             <Invitation />
         </div>
