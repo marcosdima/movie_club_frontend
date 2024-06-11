@@ -70,6 +70,7 @@ function App() {
     <div style={{ padding: 10 }}>
       <Bar />
       <Routes>
+        <Route path='/' element={<h1 style={{ textAlign: 'center' }}>Movies Club</h1>} />
         <Route path='/group' element={<Group />} />
         <Route path='/groups' element={<GroupsDisplay />} />
         <Route path='/login' element={<LogIn />} />
