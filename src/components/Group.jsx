@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import ActivityForm from "./ActivityForm";
 import Invitation from "./Invitation";
 
 const Group = () => {
@@ -42,7 +41,6 @@ const Group = () => {
             <div>Members: {members()}</div>
             <div>Movies to watch: {filterMovies()}</div>
             <div>Movies watched: {filterMovies(true)}</div>
-            <ActivityForm />
             <Invitation />
         </div>
     );
