@@ -26,13 +26,14 @@ body {
 }
 
 .toggle {
-    background-color: #FFE8C5;
-    border: solid #FFA27F;
     border-radius: 100px;
     padding: 0.5vw 20vw;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    border: solid gray;
+    background-color: #FFE8C5;
 
     .toggle-button { 
         border: solid;
