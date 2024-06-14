@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateActivity } from "../reducers/groupReducer";
 import { addActivity } from "../reducers/groupReducer";
 import genericService from "../services/genericService";
+import CommentsDisplay from "./CommentsDisplay";
 
 const GroupActivity = ({ movieId }) => {
     const dispatch = useDispatch();
@@ -32,13 +33,15 @@ const GroupActivity = ({ movieId }) => {
         }
     }
 
+    const showIf = (showThis) => ({ display: showThis ? '' : 'none' });
+
     return (
         <>
-            {
-                activity
-                ? <button onClick={() => changeWatchedStatus(alreadyWatched) }>{alreadyWatched ? 'Unwatched' : 'Watched'}</button>
-                : <button onClick={() => addToGroup()}>Add to group</button>
-            }
+            <div>
+                <button style={showIf(activity)} onClick={() => changeWatchedStatus(alreadyWatched) }>{alreadyWatched ? 'Unwatched' : 'Watched'}</button>
+                <button style={showIf(!activity)} onClick={() => addToGroup()}>Add to group</button>
+            </div>
+            <CommentsDisplay activityId={activity?.id}/>
         </>
     )
 }

@@ -110,7 +110,7 @@ body {
 /* Movie Component */
 .movie {
     display: grid;
-    padding: 20px;
+    padding: 20px 20%;
     .poster {
         grid-column-start: 2;
         grid-column-end: 2;
@@ -122,6 +122,26 @@ body {
         grid-column-end: 2;
         grid-row-start: 2;
         grid-row-end: 4;
+    }
+    .comments {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 5;
+        display: flex;
+        flex-direction: column;
+        justify-content:space-evenly;
+        width: 500px;
+        height: 500px;
+        
+        .comments-body {
+            overflow-y: auto;
+            p {
+                word-wrap: break-word;
+                max-width: 100%;
+                max-height: 90%;
+                padding: 1px;
+            }
+        }
     }
 }
 
