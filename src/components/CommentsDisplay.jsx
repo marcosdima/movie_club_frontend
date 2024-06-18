@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import genericService from "../services/genericService";
 import { useSelector } from "react-redux";
 
+const Comment = ({ writer, text, deleteThis, id }) => {
+    return (
+        <div className="comment">
+            <p>{writer}: {text}</p> <button onClick={() => deleteThis(id)}>x</button>
+        </div>
+    );
+}
+
 const CommentsDisplay = ({ activityId }) => {
     const [comments, setComments] = useState([]);
     const [text, setText] = useState('');
@@ -14,21 +22,44 @@ const CommentsDisplay = ({ activityId }) => {
     }, [group])
 
     const commentSomething = async () => {
-        await genericService.create('comments', {
-            writer: user.id,
-            activity: activityId,
-            content: text
-        });
-        setText('')
-    } 
-    if (!group || !activityId || comments.length == 0) return <></>;
+        try {
+            const comment = await genericService.create('comments', {
+                writer: user.id,
+                activity: activityId,
+                content: text
+            });
+            setComments(comments.concat(comment));
+            setText('');
+        } catch(error) {
+            console.log(error);
+        }
+    };
+
+    const deleteComment = async (commentId) => {
+        try {
+            await genericService.remove('comments', commentId);
+            setComments(comments.filter(({ id }) => commentId !== id));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    if (!group || !activityId) return <></>;
 
     return (
         <div className='comments'>
             <h3>Comments:</h3>
             <div className="comments-body">
                 {
-                    comments.map((({ content, writer: { name }, id }) => <p key={id}>{ name }: { content }</p>))
+                    comments.map((({ content, writer: { name }, id }) => (
+                        <Comment 
+                            key={id} 
+                            deleteThis={deleteComment} 
+                            writer={name} 
+                            text={content} 
+                            id={id} 
+                        />
+                    )))
                 }
             </div>    
             <div>
