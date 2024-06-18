@@ -23,6 +23,11 @@ const update = async (path, updatedObject) => {
   return data;
 };
 
+const remove = async (path, id) => {
+  const { data } = await axios.delete(`${baseUrl}/${path}/${id}`, config());
+  return data;
+};
+
 export default {
-  getAll, create, getById, update, 
+  getAll, create, getById, update, remove,
 };
