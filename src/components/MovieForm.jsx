@@ -30,7 +30,7 @@ const MovieGetter = ({ setMovieData }) => {
     const show = {
         display: movies ? '' : 'none'
     };
-    console.log(data);
+
     return (
         <>
             <h1>Search a movie</h1>
