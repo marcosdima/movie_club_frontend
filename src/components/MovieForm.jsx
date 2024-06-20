@@ -11,15 +11,15 @@ const MovieGetter = ({ setMovieData }) => {
     const [data, setData] = useState([]);
     
     const getMovies = async () => {
-        const moviesData = await genericService.getAll(`/integrations/omdb/search/${input}`);
+        const moviesData = await genericService.getAll(`integrations/omdb/search/${input}`);
         setMovies(moviesData);
     };
 
     const getMovie = async (id) => {
-        const exists = findBy(data, 'imdbId', id);
+        const exists = findBy(data, 'imdbID', id);
         if (exists) return setMovieData(exists);
         try {
-            const movieData = await genericService.getAll(`/integrations/omdb/${id}`);
+            const movieData = await genericService.getAll(`integrations/omdb/${id}`);
             setData(data.concat(movieData));
             setMovieData(movieData);
         } catch(error) {
@@ -30,7 +30,7 @@ const MovieGetter = ({ setMovieData }) => {
     const show = {
         display: movies ? '' : 'none'
     };
-    
+    console.log(data);
     return (
         <>
             <h1>Search a movie</h1>
