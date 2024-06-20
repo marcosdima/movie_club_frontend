@@ -35,7 +35,7 @@ const MovieGetter = ({ setMovieData }) => {
         <>
             <h1>Search a movie</h1>
             <div>
-                <input value={input} onChange={({target}) => setInput(target.value)} /><button onClick={() => getMovies()}>Get</button>
+                <input placeholder={'Enter a title...'} value={input} onChange={({target}) => setInput(target.value)} /><button onClick={() => getMovies()}>Get</button>
             </div>
             <div style={show} className="movies">
                 {
