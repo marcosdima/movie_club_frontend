@@ -1,6 +1,57 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addMovie } from "../reducers/moviesReducer";
+import { findBy } from "../utils/functions";
+import MovieDisplay from "./MovieDisplay";
+import genericService from "../services/genericService";
+
+const MovieGetter = ({ setMovieData }) => {
+    const [input, setInput] = useState('');
+    const [movies, setMovies] = useState([]);
+    const [data, setData] = useState([]);
+    
+    const getMovies = async () => {
+        const moviesData = await genericService.getAll(`/integrations/omdb/search/${input}`);
+        setMovies(moviesData);
+    };
+
+    const getMovie = async (id) => {
+        const exists = findBy(data, 'imdbId', id);
+        if (exists) return setMovieData(exists);
+        try {
+            const movieData = await genericService.getAll(`/integrations/omdb/${id}`);
+            setData(data.concat(movieData));
+            setMovieData(movieData);
+        } catch(error) {
+            console.log(error);
+        }
+    };
+
+    const show = {
+        display: movies ? '' : 'none'
+    };
+    
+    return (
+        <>
+            <h1>Search a movie</h1>
+            <div>
+                <input value={input} onChange={({target}) => setInput(target.value)} /><button onClick={() => getMovies()}>Get</button>
+            </div>
+            <div style={show} className="movies">
+                {
+                    movies.map(({ title, imageUrl, imdbID }) => (
+                        <MovieDisplay 
+                            key={imdbID} 
+                            title={title} 
+                            imageUrl={imageUrl} 
+                            onClick={() => getMovie(imdbID)}
+                            />
+                    ))
+                }
+            </div>
+        </>
+    )
+}
 
 const MovieForm = () => {
     const [title, setTitle] = useState('');
@@ -13,7 +64,7 @@ const MovieForm = () => {
 
     const create = () => {
         const movie = { title, description, imageUrl, director, genres };
-        if (movie) dispatch(addMovie(movie));
+        if (movie) dispatch(addMovie({ movie }));
         reset();
     }
 
@@ -30,6 +81,14 @@ const MovieForm = () => {
         setDirector('');
         setGenre([])
     }
+
+    const setMoviesData = ({ title, description, imageUrl, director, genres }) => {
+        setTitle(title);
+        setDescription(description);
+        setImageUrl(imageUrl);
+        setDirector(director);
+        setGenre(genres);
+    } 
 
     const fields = [
         {
@@ -88,6 +147,7 @@ const MovieForm = () => {
                 </tbody>
             </table>
             <button onClick={() => create()}>Create</button>
+            <MovieGetter setMovieData={setMoviesData}></MovieGetter>
         </div>
     );
 };
