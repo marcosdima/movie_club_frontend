@@ -167,10 +167,10 @@ body {
     border: solid #FFA27F;
     border-radius: 30px;
     background-color: #FFE8C5;
-    cursor: pointer;
 
     h1 {
         padding-left: 100px;
+        cursor: pointer;
     }
 
     .info {
@@ -178,6 +178,18 @@ body {
         display: flex;
         justify-content: end;
         align-items: center;
+    }
+
+    .group-display-up {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .delete-group {
+        padding-right: 5%;
+        padding-bottom: 5%;
+        cursor: pointer;
     }
 }
 
