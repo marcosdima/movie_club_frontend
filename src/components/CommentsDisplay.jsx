@@ -24,7 +24,6 @@ const CommentsDisplay = ({ activityId }) => {
     const commentSomething = async () => {
         try {
             const comment = await genericService.create('comments', {
-                writer: user.id,
                 activity: activityId,
                 content: text
             });
