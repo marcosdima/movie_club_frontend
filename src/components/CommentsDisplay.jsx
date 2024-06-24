@@ -14,7 +14,6 @@ const CommentsDisplay = ({ activityId }) => {
     const [comments, setComments] = useState([]);
     const [text, setText] = useState('');
     const group = useSelector((state) => state.group);
-    const user = useSelector((state) => state.user);
 
     useEffect(() => {
         const getComments = async () => setComments(await genericService.getAll(`comments/${activityId}`));
