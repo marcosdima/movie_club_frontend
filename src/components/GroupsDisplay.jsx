@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { setGroup } from "../reducers/groupReducer";
+import { removeGroup } from "../reducers/groupsReducer";
 import GroupForm from "./GroupForm";
 import { useDispatch, useSelector } from "react-redux";
 import PersonIcon from '@mui/icons-material/Person';
@@ -10,6 +11,7 @@ import { useState } from "react";
 
 const Group = ({ name, members, movies, id, handleClick }) => {
     const [mouseOn, setMouseOn] = useState(false);
+    const dispatch = useDispatch();
     const showIfMouseOn = {
         display: mouseOn ? '' : 'none'
     };
@@ -19,6 +21,7 @@ const Group = ({ name, members, movies, id, handleClick }) => {
         try {
             // Create === post
             await genericService.create(`groups/leave/${id}`);
+            dispatch(removeGroup(id));
         } catch(error) {
             console.error(error);
         }
