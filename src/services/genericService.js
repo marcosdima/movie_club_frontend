@@ -13,7 +13,7 @@ const getById = async (path, id) => {
   return data;
 };
 
-const create =  async (path, newObject) => {
+const create =  async (path, newObject={}) => {
   const { data } = await axios.post(`${baseUrl}/${path}`, newObject, config());
   return data;
 };

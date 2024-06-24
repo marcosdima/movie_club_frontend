@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PersonIcon from '@mui/icons-material/Person';
 import CloseIcon from '@mui/icons-material/Close';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import genericService from "../services/genericService";
 import { useState } from "react";
 
 const Group = ({ name, members, movies, id, handleClick }) => {
@@ -12,6 +13,17 @@ const Group = ({ name, members, movies, id, handleClick }) => {
     const showIfMouseOn = {
         display: mouseOn ? '' : 'none'
     };
+
+    const leaveGroup = async (id) => {
+        // TOTHINK: group service or change name 'create' to post.
+        try {
+            // Create === post
+            await genericService.create(`groups/leave/${id}`);
+        } catch(error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div 
             className="group-display" 
@@ -20,7 +32,7 @@ const Group = ({ name, members, movies, id, handleClick }) => {
             >
             <div className="group-display-up">
                 <h1 onClick={() => handleClick(id)} >{ name }</h1>
-                <div style={showIfMouseOn} className='delete-group' onClick={() => console.log('deletete!')}><CloseIcon /></div>
+                <div style={showIfMouseOn} className='delete-group' onClick={() => leaveGroup(id)}><CloseIcon /></div>
             </div>
             <p className="info">
                 <PersonIcon />{ members } <LocalMoviesIcon /> { movies }
