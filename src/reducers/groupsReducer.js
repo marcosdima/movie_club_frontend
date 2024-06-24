@@ -38,13 +38,16 @@ const groupsSlice = createSlice({
       ));
       return stateUpdated;
     },
+    removeGroup(state, { payload: idRemove }) {
+      return state.filter(({ id }) => id !== idRemove);
+    },
     resetGroups() {
       return [];
     },
   },
 });
 
-export const { resetGroups, addGroup, updateGroup, updateActivityInGroup, addActivityInGroup } = groupsSlice.actions;
+export const { resetGroups, addGroup, updateGroup, updateActivityInGroup, addActivityInGroup, removeGroup } = groupsSlice.actions;
 const { setGroups } = groupsSlice.actions;
 
 export const initialGroups = () => {
