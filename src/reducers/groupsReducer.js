@@ -14,15 +14,15 @@ const groupsSlice = createSlice({
     },
     updateGroup(state, { payload }) {
       const stateUpdated = state.map((group) => payload.id !== group.id ? group : payload);
-      return stateUpdated
+      return stateUpdated;
     },
     addActivityInGroup(state, { payload }) {
       const stateUpdated = state.map((group) => (
         payload.group !== group.id
-        ? group
-        : { 
+          ? group
+          : { 
             ...group, 
-            history: group.history.concat(payload)
+            history: group.history.concat(payload),
           }
       ));
       return stateUpdated;
@@ -30,10 +30,10 @@ const groupsSlice = createSlice({
     updateActivityInGroup(state, { payload }) {
       const stateUpdated = state.map((group) => (
         payload.group !== group.id
-        ? group
-        : { 
+          ? group
+          : { 
             ...group, 
-            history: group.history.map((activity) => activity.id !== payload.id ? activity : payload)
+            history: group.history.map((activity) => activity.id !== payload.id ? activity : payload),
           }
       ));
       return stateUpdated;
